@@ -1,0 +1,79 @@
+.home-layout{
+    // border:1px solid red;
+    // display: flex;
+    hgroup{
+        height:0.4rem;
+        // background:red;
+        background:rgba(0,0,0,0.1);
+        font-size: 0.12rem;
+        padding-left: 0.3rem;
+        // line-height: 100%;
+        display: flex;
+        align-items: center;
+        }
+
+    // 头部
+    header{
+        height:1rem;
+        // border:2px solid green;
+        // padding:0 0.3rem;
+        display: flex;
+        align-items: center;
+        img{
+            flex:1;
+            height: 100%;
+            // border:2px solid red;
+            // width: 1.2rem;
+        };
+
+        .header-right{
+            margin-left: 2rem;
+            flex:3;
+            // background:yellowgreen;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            // padding:0.12rem 0.3rem 0.12rem 0; 
+            padding-right: 0.3rem;
+            .area{
+                // background:gray;
+                height: 50%;
+                // line-height: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                font-size: 0.12rem;
+                a{
+                    color: black;
+                    margin-left: 0.1rem;
+                }
+            }
+            ul{
+                display: flex;
+                // background:red;
+                height: 50%;
+                margin-bottom: 0;
+                li{
+                    flex:1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-top:0.03rem solid rgba(0,0,0,0.15);
+                    margin-left: 0.1rem;
+                    height: 100%;
+                    font-size: 0.14rem;
+                    font-weight: 600;
+                    color:rgba(0,0,0,0.55)
+                }
+            }
+        }
+    }
+
+    // banner 
+            .banner{
+                height:3rem;
+                border:2px solid red;   
+                width: 100%;
+            }
+}
