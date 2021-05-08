@@ -12,6 +12,8 @@ body {
    height:100%;
 }
 
+
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -58,3 +60,14 @@ a:hover img{ border:none;}
 /* Hides from IE-mac \*/
 * html .clearfix { height: 1%;}
 .clearfix {display: block;}
+p{
+    margin:0;
+}
+
+/* iconfont通用代码 */
+.icon {
+    width: 1em; height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+ }
