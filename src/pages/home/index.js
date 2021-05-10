@@ -7,8 +7,8 @@ import {
     Switch,
     Route,
     Link
-  } from "react-router-dom";
-  
+} from "react-router-dom";
+
 export default class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -31,8 +31,12 @@ export default class Home extends React.Component {
 
                         <ul>
                             <li>
-                            <Link to='/park'>停车地图</Link></li>
-                            <li>月租专区</li>
+                                <Link to='/park'>停车地图</Link>
+                            </li>
+                            <li>
+                                <Link to='/month'>月租专区</Link>
+                            </li>
+               
                             <li>出租车位</li>
                             <li>使用介绍</li><li>增值服务</li>
                             <li>会员专区</li>
