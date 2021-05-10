@@ -2,10 +2,20 @@ import React from 'react'
 import './style.less'
 import { message, Button, Input, Checkbox } from 'antd';
 import { SmileTwoTone, HeartTwoTone, CheckCircleTwoTone } from '@ant-design/icons';
-
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
+  
 export default class Home extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
+        this.state = {
+            username: '',
+            password: ''
+        }
     }
 
     render() {
@@ -16,11 +26,12 @@ export default class Home extends React.Component {
                     <img src={require('/src/static/home/logo.png')} />
                     <div className='header-right'>
                         <div className='area'>上海站 <a onClick={() => {
-                            message.error('其他城市未开放')
+                            message.error('功能未开放')
                         }}>[切换城市]</a></div>
 
                         <ul>
-                            <li>停车地图</li>
+                            <li>
+                            <Link to='/park'>停车地图</Link></li>
                             <li>月租专区</li>
                             <li>出租车位</li>
                             <li>使用介绍</li><li>增值服务</li>
@@ -36,7 +47,9 @@ export default class Home extends React.Component {
                 <main>
                     <div className='main-l'>
                         <div className='main-l-login'>
-                            <p className='p-title'><b style={{ color: '#31912D' }}>会员登陆</b> <b>LOGIN</b></p>
+                            <p className='p-title'><b style={{ color: '#31912D' }} onClick={() => {
+                            }}>会员登陆</b> <b>LOGIN</b>
+                            </p>
                             <p>
                                 <Input placeholder='请输入用户名' />
                             </p>
@@ -102,111 +115,122 @@ export default class Home extends React.Component {
                                 <div className='article-1'>
                                     <p>
                                         <span>商业分类</span>
-                                        <div className='more'>more</div>
+                                        <span className='more'>more</span>
                                     </p>
                                     <table>
-                                        <tr>
-                                            <th>曲阳公园</th>
-                                            <th>和平公园</th>
-                                            <th>鲁迅公园</th>
-                                            <th>黄浦区银行</th>
-                                            <th>陆家嘴商区</th>
-                                        </tr>
-                                        <tr>
-                                            <th>闵行公园</th>
-                                            <th>徐家汇</th>
-                                            <th>虹桥机场</th>
-                                            <th>南京路</th>
-                                            <th>豫园</th>
-                                        </tr>
-                                        <tr>
-                                            <th>新天地</th>
-                                            <th>金茂大厦</th>
-                                            <th>人民广场</th>
-                                            <th>港汇广场</th>
-                                            <th>正大广场</th>
-                                        </tr>
+                                        <tbody>
+                                            <tr>
+                                                <th>曲阳公园</th>
+                                                <th>和平公园</th>
+                                                <th>鲁迅公园</th>
+                                                <th>黄浦区银行</th>
+                                                <th>陆家嘴商区</th>
+                                            </tr>
+                                        </tbody>
+
+                                        <tbody>
+                                            <tr>
+                                                <th>闵行公园</th>
+                                                <th>徐家汇</th>
+                                                <th>虹桥机场</th>
+                                                <th>南京路</th>
+                                                <th>豫园</th>
+                                            </tr>
+                                        </tbody>
+
+                                        <tbody>
+                                            <tr>
+                                                <th>新天地</th>
+                                                <th>金茂大厦</th>
+                                                <th>人民广场</th>
+                                                <th>港汇广场</th>
+                                                <th>正大广场</th>
+                                            </tr>
+                                        </tbody>
                                     </table>
                                 </div>
 
                                 <div className='article-2'>
                                     <p>
                                         <span>区县分类</span>
-                                        <div className='more'>more</div>
+                                        <span className='more'>more</span>
                                     </p>
                                     <table>
-                                        <tr>
-                                            <th>徐汇</th>
-                                            <th>虹口</th>
-                                            <th>黄埔</th>
-                                            <th>卢湾</th>
-                                            <th>南汇</th>
-                                            <th>宝山</th>
-                                            <th>长宁</th>
-                                            <th>崇明</th>
-                                        </tr>
-                                        <tr>
-                                            <th>奉贤</th>
-                                            <th>嘉定</th>
-                                            <th>金山</th>
-                                            <th>静安</th>
-                                            <th>普陀</th>
-                                            <th>浦东</th>
-                                            <th>南汇</th>
-                                        </tr>
+                                        <tbody>
+                                            <tr>
+                                                <th>徐汇</th>
+                                                <th>虹口</th>
+                                                <th>黄埔</th>
+                                                <th>卢湾</th>
+                                                <th>南汇</th>
+                                                <th>宝山</th>
+                                                <th>长宁</th>
+                                                <th>崇明</th>
+                                            </tr>
+                                        </tbody>
+
+                                        <tbody>
+                                            <tr>
+                                                <th>奉贤</th>
+                                                <th>嘉定</th>
+                                                <th>金山</th>
+                                                <th>静安</th>
+                                                <th>普陀</th>
+                                                <th>浦东</th>
+                                                <th>南汇</th>
+                                            </tr>
+                                        </tbody>
+
                                     </table>
                                 </div>
 
                                 <div className='article-3'>
-                                    <p>
+                                    <div>
                                         <span className='function'>功能分类</span>
                                         <section>
                                             <div className='more'>more</div>
                                         </section>
-                                    </p>
-                                    {/* <img src={require('/src/static/home/gongneng.png')}/> */}
-                                    {/* <section></section> */}
+                                    </div>
 
                                     <ul>
                                         <li>
-                                            <svg class="icon" aria-hidden="true">
+                                            <svg className="icon" aria-hidden="true">
                                                 <use xlinkHref="#icon-ditiexiaotubiao"></use>
                                             </svg>
                                             <span>地铁</span>
                                         </li>
                                         <li>
-                                            <svg class="icon" aria-hidden="true">
+                                            <svg className="icon" aria-hidden="true">
                                                 <use xlinkHref="#icon-shangchang"></use>
                                             </svg>
                                             <span>商场</span>
                                         </li>
                                         <li>
-                                            <svg class="icon" aria-hidden="true">
+                                            <svg className="icon" aria-hidden="true">
                                                 <use xlinkHref="#icon-jiudian"></use>
                                             </svg>
                                             <span>酒店</span>
                                         </li>
                                         <li>
-                                            <svg class="icon" aria-hidden="true">
+                                            <svg className="icon" aria-hidden="true">
                                                 <use xlinkHref="#icon-canyin"></use>
                                             </svg>
                                             <span>餐饮</span>
                                         </li>
                                         <li>
-                                            <svg class="icon" aria-hidden="true">
+                                            <svg className="icon" aria-hidden="true">
                                                 <use xlinkHref="#icon-hongshizi"></use>
                                             </svg>
                                             <span>医院</span>
                                         </li>
                                         <li>
-                                            <svg class="icon" aria-hidden="true">
+                                            <svg className="icon" aria-hidden="true">
                                                 <use xlinkHref="#icon-gongyuan"></use>
                                             </svg>
                                             <span>公园</span>
                                         </li>
                                     </ul>
                                 </div>
-
                             </article>
                             <img src={require('/src/static/home/map.png')} />
                         </section>
