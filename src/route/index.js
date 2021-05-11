@@ -9,21 +9,26 @@ import {
 
 import Home from '/src/pages/home'
 import Park from '/src/pages/park'
-import ParkDetail from '/src/pages/park/detail.js'
+import ParkDetail from '/src/pages/park/detail'
 import Month from '/src/pages/month'
+import MonthDetail from '/src/pages/month/detail'
+import MonthStop from '/src/pages/month/stop'
 
 const BaseRouter = () => {
   return (
     <Router>
       <>
         <Switch>
+          {/* 停车地图 */}
+          <Route path="/park" exact component={Park}/>
           <Route path="/park/detail" component={ParkDetail}/>
-          <Route path="/park" component={Park}/>
           
-          <Route path='/month' component={Month}/>
-          <Route path="/">
-            <Home />
-          </Route>
+          {/* 月租专区 */}
+          <Route path='/month' exact component={Month}/>
+          <Route path='/month/detail' component={MonthDetail}/>
+          <Route path='/month/stop' component={MonthStop}/>
+
+          <Route path="/" component={Home}/>
         </Switch>
       </>
     </Router>

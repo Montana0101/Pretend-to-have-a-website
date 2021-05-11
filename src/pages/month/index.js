@@ -42,7 +42,6 @@ const columns = [
         render: (text, record) => (
             <Space size="middle" key={text.index}>
                 <Link to={{ pathname: '/month/detail', query: { data: text } }} style={{ color: '#31912D' }}>查看</Link>
-                {/* <span>{JSON.stringify(text)}</span> */}
             </Space>
         ),
     },
