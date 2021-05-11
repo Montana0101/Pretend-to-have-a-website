@@ -37,7 +37,9 @@ export default class Home extends React.Component {
                                 <Link to='/month'>月租专区</Link>
                             </li>
                
-                            <li>出租车位</li>
+                            <li>
+                            <Link to='/rent'>出租车位</Link>
+                            </li>
                             <li>使用介绍</li><li>增值服务</li>
                             <li>会员专区</li>
                         </ul>

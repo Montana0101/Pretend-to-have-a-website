@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>front-web</title>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script src="web3.min.js"></script>
+    <script type="text/javascript" src="testcontract_abi.js"></script>
+</head>
+
+<body>
+    <h4>账号: <span id="account"></span></h4>
+    <hr>
+    <div id="content">
+        <h4>智能合约: Test</b> </h4>
+        <p>获取智能合约中的x值: <span id="value"></span></p>
+
+        <form role="form">
+            <h4>设置x值</h4>
+            <input id="newValue" type="text" />
+            <input type="button" name="submit" value="提交" />
+        </form>
+    </div>
+
+    <script type="text/javascript">
+
+        const abi = [
+            {
+                "inputs": [],
+                "stateMutability": "nonpayable",
+                "type": "constructor"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "owner",
+                        "type": "address"
+                    }
+                ],
+                "name": "add",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "getNum",
+                "outputs": [
+                    {
+                        "internalType": "int256",
+                        "name": "",
+                        "type": "int256"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            }
+        ]
+        var testContract;
+        var userAccount;
+        function startApp() {
+            var TestAddress = 'xxxxxxxxxxxxxxxxxxxxxxxx';
+            var test = web3.eth.contract(testContractABI);
+            testContract = test.at(TestAddress);
+            //userAccount = web3.eth.accounts[0];
+            // var accountInterval = setInterval(function() {
+            // 	// Check if account has changed
+            // 	if (web3.eth.accounts[0] !== userAccount) {
+            // 		alert('user account changed');
+            // 	}
+            // }, 100);
+            updateValue();
+        }
+
+        function updateValue() {
+            testContract.getX(function (err, result) {
+                if (err) {
+                    alert('error');
+                } else {
+                    $('#value').html(result);
+                }
+            });
+        }
+
+        window.addEventListener('load', function () {
+            // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+            if (typeof web3 !== 'undefined') {
+                // Use Mist/MetaMask's provider
+                web3 = new Web3(web3.currentProvider);
+            } else {
+                alert('please install MetaMask');
+            }
+            startApp();
+        })
+    </script>
+</body>
+
+</html>

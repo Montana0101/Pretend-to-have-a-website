@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Divider, Button,Input,message} from 'antd'
+import { Divider, Button, Input, message } from 'antd'
 
 
 const { TextArea } = Input;
 
-import './detail.less'
+import './stop.less'
 
 const MonthStop = (props) => {
     const [data, setData] = useState({
@@ -16,15 +16,12 @@ const MonthStop = (props) => {
         price: 800,
         free: 42
     })
-    // useEffect(() => {
-    //     if(!props.location.query){
-    //         props.history.push('month')
-    //     }
-    // }, [])
 
+    const [inputVal, setInputVal] = useState('')
+    const [textVal, setTextVal] = useState('')
 
     return (
-        <div className='layout-month-detail'>
+        <div className='layout-month-stop'>
             <header> <Link to='/' style={{ color: 'black' }}>首页</Link>&nbsp;&nbsp; &gt; &nbsp; <Link to='/month' style={{ color: 'black' }}>月租专区</Link>&nbsp;&nbsp; &gt; &nbsp; 租用信息详情</header>
             <main>
                 <h1>申请终止租用</h1>
@@ -70,11 +67,50 @@ const MonthStop = (props) => {
                         </p>
                     </div>
                 </section>
-                <p>
-                    <span>终止</span>
-                     <TextArea showCount maxLength={100} onChange={()=>{}} />
+                <p style={{
+                    height: '0.6rem', display: 'flex',
+                    alignItems: 'center',
+                    width: '100%',
+                    justifyContent: 'flex-start',
+                    fontSize: "0.14rem",
+                    paddingLeft: "0.3rem"
+                }}>
+
+                    <span>   <span style={{ color: 'red' }}>* </span> 必填项</span>
                 </p>
-                <p style={{ display: 'flex', justifyContent: 'center', width: '100%' ,marginTop:'0.3rem'}}>
+
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    width: '100%',
+                    justifyContent: 'flex-start',
+                    fontSize: "0.14rem",
+                    paddingLeft: "0.3rem"
+                }}>
+                    <span style={{
+                        display: 'inline-block',
+                        width: '2rem'
+                    }}>   <span style={{ color: 'red' }}>*</span> 终止原因 :</span>
+                    <TextArea autoSize={{ minRows: 5 }} style={{ flex: 4 }} showCount maxLength={100}
+                        onChange={(e) => { setTextVal(e, e.target.value) }} />
+                </div>
+
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    width: '100%',
+                    justifyContent: 'flex-start',
+                    fontSize: "0.14rem",
+                    paddingLeft: "0.3rem"
+                }}>
+                    <span style={{
+                        display: 'inline-block',
+                        width: '2rem'
+                    }}>   <span style={{ color: 'red' }}>*</span> 申请停租日期 :</span>
+                    <Input style={{ width: '2rem' }} onChange={e => setInputVal(e.target.value)} />
+                </div>
+
+                <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '0.3rem' }}>
                     <Button style={{
                         height: '0.44rem', width: '1.3rem', display: 'flex',
                         color: 'white', borderRadius: '0.05rem',
@@ -82,7 +118,13 @@ const MonthStop = (props) => {
                         background: 'linear-gradient(#D8EAD7,#31912D)', border: '0.02rem solid #31912D',
                         fontSize: '0.16rem', marginRight: '0.3rem'
                     }}
-                        onClick={() => { message.success('已提交待审核')}}
+                        onClick={() => {
+                            if (textVal && inputVal) {
+                                message.success('已提交待审核')
+                            } else {
+                                message.error('请输入必填项')
+                            }
+                        }}
                     >递交申请</Button>
 
                     <Button style={{
@@ -94,7 +136,7 @@ const MonthStop = (props) => {
                     }}
                         onClick={() => { props.history.push('/month') }}
                     >返回</Button>
-                </p>
+                </div>
             </main>
         </div>
     )

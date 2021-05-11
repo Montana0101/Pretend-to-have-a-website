@@ -3,7 +3,7 @@ import { Link, Route, withRouter } from 'react-router-dom'
 import './detail.less'
 import { Button, Divider } from 'antd'
 
-export default class ParkDetail extends React.Component {
+export default class RentDetail extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,7 +17,6 @@ export default class ParkDetail extends React.Component {
                 data: this.props.location.query.data
             })
         }
-
     }
 
     render() {
@@ -28,7 +27,7 @@ export default class ParkDetail extends React.Component {
                 <main>
                     <h1>停车场详情信息</h1>
                     <Divider dashed style={{ borderWidth: '0.02rem' }} />
-                    <img src={require('/src/static/home/car.jpg')} style={{width:"3rem"}}/>
+                    <img src={require('/src/static/home/car.jpg')} style={{ width: "3rem" }} />
                     <ul>
                         <li>
                             <span>停车场名称：</span>

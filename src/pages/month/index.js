@@ -145,7 +145,7 @@ export default class Month extends React.Component {
                             background: 'linear-gradient(#D8EAD7,#31912D)', border: '0.02rem solid #31912D',
                             fontSize: '0.16rem'
                         }}
-                            onClick={() => { this.props.history.push('/park') }}
+                            onClick={() => { this.props.history.push('/month/rent') }}
                         >租用车位</Button>
                     </p>
                     <Table columns={columns} dataSource={data} rowKey={row=>row.index} style={{width:'100%'}}/>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8" />
@@ -20,6 +20,8 @@
 	
 	function linkWallet() {
 		if (ethereum) {
+			console.log('打印下ethernum',ethereum,web3)
+		
 			web3Provider = ethereum;
 			// 新版需要请求用户授权
 			try {
@@ -29,6 +31,7 @@
 				return;
 			}
 		} else if (web3) {
+			
 			// MetaMask Legacy dapp browsers...
 			web3Provider = web3.currentProvider;
 			console.log("web3.currentProvider:");
@@ -57,4 +60,4 @@
 		});
 	}
 </script>
-</html>
+</html> -->

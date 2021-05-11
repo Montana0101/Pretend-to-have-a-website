@@ -60,7 +60,7 @@ const MonthDetail = (props) => {
 
                     </div>
                 </section>
-                <p style={{ display: 'flex', justifyContent: 'center', width: '100%' ,marginTop:'0.3rem'}}>
+                {!props.location.query.flag ? <p style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '0.3rem' }}>
                     <Button style={{
                         height: '0.44rem', width: '1.3rem', display: 'flex',
                         color: 'white', borderRadius: '0.05rem',
@@ -80,7 +80,19 @@ const MonthDetail = (props) => {
                     }}
                         onClick={() => { props.history.push('/month') }}
                     >返回</Button>
-                </p>
+                </p> :
+                    <p style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '0.3rem' }}>
+
+                        <Button style={{
+                            height: '0.44rem', width: '1.3rem', display: 'flex',
+                            color: 'white', borderRadius: '0.05rem',
+                            justifyContent: 'center', alignItems: 'center',
+                            background: 'linear-gradient(#D8EAD7,#31912D)', border: '0.02rem solid #31912D',
+                            fontSize: '0.16rem'
+                        }}
+                            onClick={() => { props.history.push('/month') }}
+                        >关闭</Button>
+                    </p>}
             </main>
         </div>
     )

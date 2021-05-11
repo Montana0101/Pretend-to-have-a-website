@@ -389,6 +389,98 @@
   margin-right: 0.1rem;
 }
 
+.layout-month-stop {
+  padding: 0.1rem 0.2rem;
+}
+.layout-month-stop p {
+  margin: 0;
+}
+.layout-month-stop header {
+  font-size: 0.12rem;
+  height: 0.3rem;
+}
+.layout-month-stop main {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.layout-month-stop main h1 {
+  font-weight: 700;
+}
+.layout-month-stop main th {
+  background: linear-gradient(white, rgba(0, 0, 0, 0.1)) !important;
+}
+.layout-month-stop main section {
+  border: 1px solid red;
+  width: 100%;
+  background-color: rgba(244, 244, 244, 0.7);
+  border: 0.02rem solid #dedede;
+  display: flex;
+  min-height: 1rem;
+  padding-bottom: 0.6rem;
+  padding-top: 0.1rem;
+}
+.layout-month-stop main section > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-left: 0.2rem;
+}
+.layout-month-stop main section > div p {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+  height: 0.4rem;
+  font-size: 0.14rem;
+}
+.layout-month-stop main section > div p .name {
+  font-weight: bold;
+  margin-right: 0.1rem;
+}
+
+.layout-park-detail {
+  padding: 0.1rem 0.2rem;
+}
+.layout-park-detail header {
+  font-size: 0.12rem;
+  height: 0.3rem;
+}
+.layout-park-detail main {
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.layout-park-detail main h1 {
+  font-weight: 700;
+}
+.layout-park-detail main ul {
+  margin-top: 0.1rem;
+  width: 100%;
+}
+.layout-park-detail main ul li {
+  display: flex;
+  font-size: 0.14rem;
+  font-weight: bold;
+  height: 0.3rem;
+}
+.layout-park-detail main ul li > span:first-child {
+  flex: 1.5;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.layout-park-detail main ul li > span:last-child {
+  flex: 1.5;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 0.3rem;
+}
+
 html{
    font-size: 100px;
    height: 100%;
