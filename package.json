@@ -4,12 +4,13 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "parcel index.html"
+    "dev": "parcel index.html --port 5012"
   },
   "dependencies": {
     "a": "^2.1.2",
     "antd": "^4.12.3",
     "babel-polyfill": "^6.26.0",
+    "rea": "^0.0.1",
     "reac": "^0.0.0",
     "react": ">= 16.8.0",
     "react-dom": ">= 16.8.0",

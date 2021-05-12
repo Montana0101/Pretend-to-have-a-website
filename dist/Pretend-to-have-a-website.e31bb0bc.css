@@ -52,6 +52,9 @@
   font-weight: 600;
   color: rgba(0, 0, 0, 0.55);
 }
+.home-layout header .header-right ul li a {
+  color: rgba(0, 0, 0, 0.5);
+}
 .home-layout .banner img {
   width: 100%;
 }
@@ -479,6 +482,79 @@
   justify-content: flex-start;
   align-items: center;
   margin-left: 0.3rem;
+}
+
+.layout-introduce {
+  padding: 0.1rem 0.2rem;
+}
+.layout-introduce header {
+  font-size: 0.12rem;
+  height: 0.3rem;
+}
+.layout-introduce .img-container {
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+}
+.layout-introduce .img-container img {
+  width: 100%;
+}
+.layout-introduce .img-container section {
+  width: 3rem;
+  height: 0.5rem;
+  z-index: 777;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: white;
+}
+
+.layout-member {
+  padding: 0.1rem 0.2rem;
+}
+.layout-member header {
+  font-size: 0.12rem;
+  height: 0.3rem;
+}
+.layout-member main {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.layout-member main h1 {
+  font-weight: 700;
+}
+.layout-member main th {
+  background: linear-gradient(white, rgba(0, 0, 0, 0.1)) !important;
+}
+.layout-member main section {
+  border: 1px solid red;
+  width: 100%;
+  background-color: rgba(244, 244, 244, 0.7);
+  border: 0.02rem solid #dedede;
+  display: flex;
+  min-height: 1rem;
+  padding-bottom: 0.6rem;
+  padding-top: 0.1rem;
+}
+.layout-member main section > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-left: 0.2rem;
+}
+.layout-member main section > div p {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+  height: 0.4rem;
+  font-size: 0.14rem;
+}
+.layout-member main section > div p .name {
+  font-weight: bold;
+  margin-right: 0.1rem;
 }
 
 html{

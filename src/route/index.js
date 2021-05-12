@@ -22,6 +22,12 @@ import MonthSearch from '/src/pages/month/search'
 import Rent from '/src/pages/rent'
 import RentDetail from '/src/pages/rent/detail'
 
+// 使用介绍
+import Introduce from '/src/pages/introduce'
+
+// 会员专区
+import Member from '/src/pages/member'
+
 const BaseRouter = () => {
   return (
     <Router>
@@ -41,6 +47,12 @@ const BaseRouter = () => {
           {/* 出租车位 */}
           <Route path='/rent' exact component={Rent}/>
           <Route path='/rent/detail' component={RentDetail}/>
+
+          {/* 使用介绍 */}
+          <Route path='/introduce' component={Introduce}/>
+
+          {/* 会员中心 */}
+          <Route path='/member' exact component={Member}/>
 
           <Route path="/" component={Home}/>
         </Switch>

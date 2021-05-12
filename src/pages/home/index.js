@@ -14,14 +14,36 @@ export default class Home extends React.Component {
         super(props);
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            flag: false, //判断是否登陆
+        }
+    }
+
+    componentDidMount() {
+        let user = localStorage.getItem('user')
+        if (!user) {
+            console.log('没登陆')
+        } else {
+            console.log('已经登陆', user)
+            user = JSON.parse(user)
+            this.setState({
+                flag: true,
+                username: user.username,
+                password: user.password
+            })
         }
     }
 
     render() {
         return (
             <div className='home-layout'>
-                <hgroup> 您好！ 欢迎光临，会员中心 </hgroup>
+                <hgroup> 您好！ 欢迎光临，{!this.state.flag ? '会员中心' : this.state.username}
+                    {this.state.flag && <a style={{ color: '#4A9E47', fontSize: '0.12rem' }} onClick={() => {
+                        localStorage.setItem('user', '')
+                        this.setState({
+                            flag: false
+                        })
+                    }}>&nbsp;&nbsp;&nbsp;&nbsp;退出</a>}</hgroup>
                 <header>
                     <img src={require('/src/static/home/logo.png')} />
                     <div className='header-right'>
@@ -36,12 +58,37 @@ export default class Home extends React.Component {
                             <li>
                                 <Link to='/month'>月租专区</Link>
                             </li>
-               
+
                             <li>
-                            <Link to='/rent'>出租车位</Link>
+                                <Link to='/rent'>出租车位</Link>
                             </li>
-                            <li>使用介绍</li><li>增值服务</li>
-                            <li>会员专区</li>
+                            <li>
+                                <Link to='/introduce'>使用介绍</Link>
+                            </li>
+                            <li>
+                                <a onClick={() => {
+                                    message.info('功能未开放')
+                                }}>增值服务</a></li>
+                            <li>
+                                {
+                                    !this.state.flag ? <Link to='' onClick={
+                                        () => {
+                                            if (!this.state.flag) {
+                                                message.warn('请先登陆')
+                                                return
+                                            }
+                                        }
+                                    }>会员中心</Link> : <Link to='/member' onClick={
+                                        () => {
+                                            if (!this.state.flag) {
+                                                message.warn('请先登陆')
+                                                return
+                                            }
+                                        }
+                                    }>会员中心</Link>
+                                }
+
+                            </li>
                         </ul>
                     </div>
                 </header>
@@ -52,15 +99,23 @@ export default class Home extends React.Component {
 
                 <main>
                     <div className='main-l'>
-                        <div className='main-l-login'>
+                        {!this.state.flag && <div className='main-l-login'>
                             <p className='p-title'><b style={{ color: '#31912D' }} onClick={() => {
                             }}>会员登陆</b> <b>LOGIN</b>
                             </p>
                             <p>
-                                <Input placeholder='请输入用户名' />
+                                <Input placeholder='请输入用户名' onChange={(e) => {
+                                    this.setState({
+                                        username: e.target.value
+                                    })
+                                }} />
                             </p>
                             <p>
-                                <Input.Password placeholder='请输入密码' />
+                                <Input.Password placeholder='请输入密码' onChange={(e) => {
+                                    this.setState({
+                                        password: e.target.value
+                                    })
+                                }} />
                             </p>
                             <p className='p-login'>
                                 {/* <Button type="primary">注册</Button> */}
@@ -69,17 +124,43 @@ export default class Home extends React.Component {
                                         console.log('选中存储密码')
                                     }
                                 }>记住密码</Checkbox>
-                                <Button danger type='primary'>登陆</Button>
+                                <Button danger type='primary' onClick={() => {
+                                    if (!this.state.username) {
+                                        message.warn('请输入用户名')
+                                    }
+                                    if (!this.state.password) {
+                                        message.warn('请输入密码')
+                                    }
+                                    localStorage.setItem('user', JSON.stringify(
+                                        {
+                                            username: this.state.username,
+                                            password: this.state.password
+                                        }
+                                    ))
+                                    this.setState({
+                                        flag: true
+                                    })
+                                }}>登陆</Button>
                             </p>
                             <p className='p-register'>
                                 <span>会员注册</span>
                                 <span style={{ margin: '0 0.1rem', color: 'rgba(0,0,0,0.3)', transform: 'scale(0.7)' }}>|</span>
                                 <span>忘记密码</span>
                             </p>
-                        </div>
+                        </div>}
 
                         <img src={require('/src/static/home/guanggao.png')} />
-                        {/* <img src={require('/src/static/home/guanggao.png')} /> */}
+
+                        {
+                            this.state.flag && <img src={require('/src/static/home/guanggao.png')} />
+                        }
+                        {
+                            this.state.flag && <img src={require('/src/static/home/guanggao.png')} />
+                        }
+                        {
+                            this.state.flag && <img src={require('/src/static/home/guanggao.png')} />
+                        }
+
                         <div className='main-l-contact'>
                             <p style={{ background: 'rgba(0,0,0,0.1)' }}>
                                 <SmileTwoTone style={{ marginRight: "0.1rem" }} />
