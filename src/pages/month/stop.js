@@ -17,6 +17,17 @@ const MonthStop = (props) => {
         free: 42
     })
 
+    const [date,setDate] = useState('')
+    const [start,setStart] = useState('')
+
+    useEffect(()=>{
+        console.log('props.location.query',props.location.state)
+        if(props.location.state){
+            setDate(props.location.state.date)
+            setStart(props.location.state.start)
+        }
+    },[])
+
     const [inputVal, setInputVal] = useState('')
     const [textVal, setTextVal] = useState('')
 
@@ -43,7 +54,7 @@ const MonthStop = (props) => {
                         </p>
                         <p>
                             <span className='name'>本次租用截止时间 :</span>
-                            <span>2014-07-01</span>
+                            <span>{date}</span>
                         </p>
                     </div>
 
@@ -59,7 +70,7 @@ const MonthStop = (props) => {
                         </p>
                         <p>
                             <span className='name'>起租时间 :</span>
-                            <span>2014-05-01</span>
+                            <span>{start}</span>
                         </p>
                         <p>
                             <span className='name'>支付状态 :</span>

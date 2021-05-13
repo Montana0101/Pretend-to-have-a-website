@@ -4,6 +4,12 @@ import { Divider, Button } from 'antd'
 
 import './detail.less'
 
+const months = [6, 7, 8, 9]
+const days = new Array(30).fill(1)
+days.map((item, index) => {
+    return days[index] = index + 1
+})
+
 const MonthDetail = (props) => {
     const [data, setData] = useState({
         index: 10,
@@ -13,12 +19,37 @@ const MonthDetail = (props) => {
         price: 800,
         free: 42
     })
-    // useEffect(() => {
-    //     if(!props.location.query){
-    //         props.history.push('month')
-    //     }
-    // }, [])
-
+    const [date, setDate] = useState('')
+    const [startDate, setStartDate] = useState('')
+    useEffect(() => {
+        if (!props.location.query) {
+            props.history.push('month')
+        } else {
+            let query = props.location.query
+            // 判断是否有缓存
+            let ret = JSON.parse(localStorage.getItem(`month-detail-${query.data.index}`))
+            // console.log('输出下',ret)
+            if (ret && ret.data) {
+                console.log('打印下缓存',ret)
+                setDate(ret.data.date)
+                setStartDate(ret.data.startDate)
+                
+            } else {
+          
+                let mmm = months[Math.floor(Math.random() * months.length)]
+                let ddd = days[Math.floor(Math.random() * days.length)]
+                let date = `2021/0${mmm}/${ddd}`
+                let startDate = `2021/0${mmm - 5}/${ddd}`
+                setDate(date)
+                setStartDate(startDate)
+                let obj = {}
+                query.data['date'] = date
+                query.data['startDate'] = startDate
+                obj = query
+                localStorage.setItem(`month-detail-${query.data.index}`, JSON.stringify(obj))
+            }
+        }
+    }, [])
 
     return (
         <div className='layout-month-detail'>
@@ -51,7 +82,7 @@ const MonthDetail = (props) => {
                         </p>
                         <p>
                             <span className='name'>当前租期截止时间 :</span>
-                            <span>2014/07/01</span>
+                            <span>{date}</span>
                         </p>
                         <p>
                             <span className='name'>租用状态 :</span>
@@ -68,7 +99,7 @@ const MonthDetail = (props) => {
                         background: 'linear-gradient(#D8EAD7,#31912D)', border: '0.02rem solid #31912D',
                         fontSize: '0.16rem', marginRight: '0.3rem'
                     }}
-                        onClick={() => { props.history.push('/month/stop') }}
+                        onClick={() => { props.history.push({ pathname: '/month/stop', state: { date: date, start: startDate } }) }}
                     >申请终止租用</Button>
 
                     <Button style={{

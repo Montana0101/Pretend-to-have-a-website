@@ -5,7 +5,6 @@ import {
   Route,
   Link
 } from "react-router-dom"
-// import App from '/src/pages/app'
 
 import Home from '/src/pages/home'
 import Park from '/src/pages/park'

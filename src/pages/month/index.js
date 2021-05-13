@@ -73,7 +73,7 @@ const data = [
     {
         index: '4',
         name: 'FF2132',
-        distance: 600,
+        distance: 500,
         address: '工作日 09:00 ~ 22:00',
         price: '已锁定'
     },

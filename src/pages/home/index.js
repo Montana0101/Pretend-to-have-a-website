@@ -127,25 +127,29 @@ export default class Home extends React.Component {
                                 <Button danger type='primary' onClick={() => {
                                     if (!this.state.username) {
                                         message.warn('请输入用户名')
-                                    }
-                                    if (!this.state.password) {
+                                    } else if (!this.state.password) {
                                         message.warn('请输入密码')
+                                    } else {
+                                        localStorage.setItem('user', JSON.stringify(
+                                            {
+                                                username: this.state.username,
+                                                password: this.state.password
+                                            }
+                                        ))
+                                        this.setState({
+                                            flag: true
+                                        })
                                     }
-                                    localStorage.setItem('user', JSON.stringify(
-                                        {
-                                            username: this.state.username,
-                                            password: this.state.password
-                                        }
-                                    ))
-                                    this.setState({
-                                        flag: true
-                                    })
                                 }}>登陆</Button>
                             </p>
                             <p className='p-register'>
-                                <span>会员注册</span>
+                                <span onClick={() => {
+                                    message.warn('出现异常')
+                                }}>会员注册</span>
                                 <span style={{ margin: '0 0.1rem', color: 'rgba(0,0,0,0.3)', transform: 'scale(0.7)' }}>|</span>
-                                <span>忘记密码</span>
+                                <span onClick={() => {
+                                    message.warn('出现异常')
+                                }}>忘记密码</span>
                             </p>
                         </div>}
 
