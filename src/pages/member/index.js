@@ -7,7 +7,29 @@ export default class Member extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            obj: {}
+            obj: {},
+            fak: [
+                {
+                    name: '吴海涛',
+                    number: '310102298112',
+                    tel: '021-57072136',
+                    phone: '15321235762',
+                    card: '310102198202020981',
+                    car: '沪EK172E',
+                    email: '31231529@qq.com',
+                    address: '上海市浦东新区城丰路70弄-130弄'
+                },
+                {
+                    name: '袁寒',
+                    number: '310107259112',
+                    tel: '021-67072135',
+                    phone: '1568279121',
+                    card: '310102198604020981',
+                    car: '沪A329T',
+                    email: '2761529@qq.com',
+                    address: '上海市闵行区华翔路2009号'
+                }
+            ]
         }
     }
 
@@ -17,10 +39,26 @@ export default class Member extends React.Component {
             console.log('没登陆')
         } else {
             user = JSON.parse(user)
+            let obj = {}
+            if (user.username == 'haitao123') {
+                const _fak = JSON.parse(JSON.stringify(this.state.fak[0]))
+                for (let key in _fak) {
+                    obj[key] = _fak[key]
+                }
+                obj.username = 'haitao123'
+            } else if (user.username == 'yh2020') {
+                const _fak = JSON.parse(JSON.stringify(this.state.fak[1]))
+                for (let key in _fak) {
+                    obj[key] = _fak[key]
+                }
+                obj.username = 'yh2020'
+            } else {
+                console.log('没有数据')
+            }
             this.setState({
-                flag: true,
-                obj: user
+                obj
             })
+
         }
     }
 
@@ -40,15 +78,15 @@ export default class Member extends React.Component {
                             </p>
                             <p>
                                 <span className='name'>姓名 :</span>
-                                <span></span>
+                                <span>{obj && obj.name}</span>
                             </p>
                             <p>
                                 <span className='name'>证件类型 :</span>
-                                <span></span>
+                                <span>驾驶证</span>
                             </p>
                             <p>
                                 <span className='name'>驾照编号 :</span>
-                                <span></span>
+                                <span>{obj && obj.number}</span>
                             </p>
                             <p>
                                 <span className='name'>邮编 :</span>
@@ -60,11 +98,11 @@ export default class Member extends React.Component {
                             </p>
                             <p>
                                 <span className='name'>固定电话 :</span>
-                                <span>021-57072136</span>
+                                <span>{obj && obj.tel}</span>
                             </p>
                             <p>
                                 <span className='name'>手机号 :</span>
-                                <span>15321235762</span>
+                                <span>{obj && obj.phone}</span>
                             </p>
                         </div>
 
@@ -76,36 +114,36 @@ export default class Member extends React.Component {
                             </p>
                             <p>
                                 <span className='name'>身份证 :</span>
-                                <span></span>
+                                <span>{obj && obj.card}</span>
                             </p>
                             <p>
                                 <span className='name'>车牌号 :</span>
-                                <span>沪E2142</span>
+                                <span>{obj && obj.car}</span>
                             </p>
                             <p>
                                 <span className='name'>E-mail :</span>
-                                <span>302123@qq.com</span>
+                                <span>{obj && obj.email}</span>
                             </p>
                             <p>
                                 <span className='name'>联系地址 :</span>
-                                <span></span>
+                                <span>{obj && obj.address}</span>
                             </p>
                         </div>
                     </section>
-          
+
                 </main>
 
                 <div style={{ display: 'flex', justifyContent: 'center', adivgnItems: 'center', marginTop: '0.2rem' }}>
-                        <Button style={{
-                            height: '0.44rem', width: '1.3rem', display: 'flex',
-                            color: 'white', borderRadius: '0.05rem',
-                            justifyContent: 'center', alignItems: 'center',
-                            background: 'linear-gradient(#D8EAD7,#31912D)', border: '0.02rem solid #31912D',
-                            fontSize: '0.16rem'
-                        }}
-                            onClick={() => { this.props.history.push('/') }}
-                        >关闭</Button>
-                    </div>
+                    <Button style={{
+                        height: '0.44rem', width: '1.3rem', display: 'flex',
+                        color: 'white', borderRadius: '0.05rem',
+                        justifyContent: 'center', alignItems: 'center',
+                        background: 'linear-gradient(#D8EAD7,#31912D)', border: '0.02rem solid #31912D',
+                        fontSize: '0.16rem'
+                    }}
+                        onClick={() => { this.props.history.push('/') }}
+                    >关闭</Button>
+                </div>
             </div>
         )
     }

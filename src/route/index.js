@@ -20,6 +20,7 @@ import MonthSearch from '/src/pages/month/search'
 // 出租车位
 import Rent from '/src/pages/rent'
 import RentDetail from '/src/pages/rent/detail'
+import Publish from '/src/pages/rent/publish'
 
 // 使用介绍
 import Introduce from '/src/pages/introduce'
@@ -46,7 +47,8 @@ const BaseRouter = () => {
           {/* 出租车位 */}
           <Route path='/rent' exact component={Rent}/>
           <Route path='/rent/detail' component={RentDetail}/>
-
+          <Route path='/rent/publish' component={Publish}/>
+          
           {/* 使用介绍 */}
           <Route path='/introduce' component={Introduce}/>
 

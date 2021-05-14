@@ -39,9 +39,11 @@ export default class Home extends React.Component {
             <div className='home-layout'>
                 <hgroup> 您好！ 欢迎光临，{!this.state.flag ? '会员中心' : this.state.username}
                     {this.state.flag && <a style={{ color: '#4A9E47', fontSize: '0.12rem' }} onClick={() => {
-                        localStorage.setItem('user', '')
+                        localStorage.removeItem('user')
                         this.setState({
-                            flag: false
+                            flag: false,
+                            username: '',
+                            password: ''
                         })
                     }}>&nbsp;&nbsp;&nbsp;&nbsp;退出</a>}</hgroup>
                 <header>
@@ -130,15 +132,21 @@ export default class Home extends React.Component {
                                     } else if (!this.state.password) {
                                         message.warn('请输入密码')
                                     } else {
-                                        localStorage.setItem('user', JSON.stringify(
-                                            {
-                                                username: this.state.username,
-                                                password: this.state.password
-                                            }
-                                        ))
-                                        this.setState({
-                                            flag: true
-                                        })
+                                        if (this.state.username == 'haitao123' ||
+                                            this.state.username == 'yh2020') {
+                                            localStorage.setItem('user', JSON.stringify(
+                                                {
+                                                    username: this.state.username,
+                                                    password: this.state.password,
+                                                    realname:this.state.username == 'haitao123'?'赵海涛':"袁寒" 
+                                                }
+                                            ))
+                                            this.setState({
+                                                flag: true
+                                            })
+                                        } else {
+                                            message.warn('非注册会员')
+                                        }
                                     }
                                 }}>登陆</Button>
                             </p>

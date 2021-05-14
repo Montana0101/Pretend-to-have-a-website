@@ -484,6 +484,52 @@
   margin-left: 0.3rem;
 }
 
+.layout-rent-publish {
+  padding: 0.1rem 0.2rem;
+}
+.layout-rent-publish .red-dot {
+  color: red;
+  margin-left: 0.1rem;
+}
+.layout-rent-publish header {
+  font-size: 0.12rem;
+  height: 0.3rem;
+}
+.layout-rent-publish main {
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.layout-rent-publish main h1 {
+  font-weight: 700;
+}
+.layout-rent-publish main ul {
+  margin-top: 0.1rem;
+  width: 100%;
+}
+.layout-rent-publish main ul li {
+  display: flex;
+  font-size: 0.14rem;
+  font-weight: bold;
+  height: 0.3rem;
+  margin: 0.2rem 0;
+}
+.layout-rent-publish main ul li > span:first-child {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.layout-rent-publish main ul li > span:last-child {
+  flex: 2;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 0.3rem;
+}
+
 .layout-introduce {
   padding: 0.1rem 0.2rem;
 }

@@ -21,6 +21,8 @@ export default class RentDetail extends React.Component {
     }
 
     render() {
+        const info = JSON.parse(localStorage.getItem('parkinfo'))
+
         const { data } = this.state
         return (
             <div className='layout-park-detail'>
@@ -34,15 +36,15 @@ export default class RentDetail extends React.Component {
                     <ul>
                         <li>
                             <span>停车场名称 ：</span>
-                            <span>{data && data.name}</span>
+                            <span>{info && info.parkname}</span>
                         </li>
                         <li>
                             <span>地址 ：</span>
-                            <span>{data && data.address}</span>
+                            <span>{info && info.address}</span>
                         </li>
                         <li>
                             <span>物业名称 ：</span>
-                            <span>宏鸿物业管理有限公司</span>
+                            <span>{info && info.property}</span>
                         </li>
                         <li>
                             <span>可租时段 ：</span>
