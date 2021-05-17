@@ -195,7 +195,7 @@ export default class Publish extends React.Component {
                                 onClick={() => {
                                     if (address && parkname && property) {
                                         if (isRead) {
-                                            message.success('提交成功，车位待审核中')
+                                            message.success('操作成功')
                                             this.props.history.push('/rent')
                                             let obj = {
                                                 address:address,

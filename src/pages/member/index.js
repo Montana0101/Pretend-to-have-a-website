@@ -10,7 +10,7 @@ export default class Member extends React.Component {
             obj: {},
             fak: [
                 {
-                    name: '吴海涛',
+                    name: '赵海涛',
                     number: '310102298112',
                     tel: '021-57072136',
                     phone: '15321235762',

@@ -57,13 +57,49 @@ export default class Home extends React.Component {
                             <li>
                                 <Link to='/park'>停车地图</Link>
                             </li>
+
                             <li>
-                                <Link to='/month'>月租专区</Link>
+                                {
+                                    !this.state.flag ? <Link to='' onClick={
+                                        () => {
+                                            if (!this.state.flag) {
+                                                message.warn('请先登陆')
+                                                return
+                                            }
+                                        }
+                                    }>月租专区</Link> : <Link to='/month' onClick={
+                                        () => {
+                                            if (!this.state.flag) {
+                                                message.warn('请先登陆')
+                                                return
+                                            }
+                                        }
+                                    }>月租专区</Link>
+                                }
                             </li>
 
                             <li>
-                                <Link to='/rent'>出租车位</Link>
+                                {
+                                    !this.state.flag ? <Link to='' onClick={
+                                        () => {
+                                            if (!this.state.flag) {
+                                                message.warn('请先登陆')
+                                                return
+                                            }
+                                        }
+                                    }>出租车位</Link> : <Link to='/rent' onClick={
+                                        () => {
+                                            if (!this.state.flag) {
+                                                message.warn('请先登陆')
+                                                return
+                                            }
+                                        }
+                                    }>出租车位</Link>
+                                }
+
                             </li>
+
+
                             <li>
                                 <Link to='/introduce'>使用介绍</Link>
                             </li>
@@ -138,7 +174,7 @@ export default class Home extends React.Component {
                                                 {
                                                     username: this.state.username,
                                                     password: this.state.password,
-                                                    realname:this.state.username == 'haitao123'?'赵海涛':"袁寒" 
+                                                    realname: this.state.username == 'haitao123' ? '赵海涛' : "袁寒"
                                                 }
                                             ))
                                             this.setState({

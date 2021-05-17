@@ -175,7 +175,7 @@ export default class Rent extends React.Component {
             data:_arr
         },()=>{
             
-        if (parkinfo.stallname) {
+        if (parkinfo && parkinfo.stallname) {
             console.log('大数据', parkinfo)
             let _data = JSON.parse(JSON.stringify(this.state.data))
             _data.unshift({

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Cascader, Select, Row, Col, Button, Input, Table, Tag, Space } from 'antd'
+import _iframe from '/src/assets/map.html'
 
 const { Option } = Select
 
@@ -157,17 +158,17 @@ const columns = [
 const data = [
     {
         index: '1',
-        name: '上海中医药大学附属岳阳中西医结合医院-停车场',
+        name: '大悦城购物中心-北座停车场',
         distance: 700,
-        address: '上海市虹口区甘河路110号',
+        address: '上海市静安区西藏北路166号大悦城B2 ',
         price: 1000,
         free: 30
     },
     {
         index: 2,
-        name: '虹口足球场-地上停车场',
+        name: '上海烟草集团责任有限公司停车场',
         distance: 1020,
-        address: '东江湾路444号',
+        address: '通北路800号',
         price: 900,
         free: 10
     },
@@ -249,8 +250,22 @@ export default class Park extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            address:'',
             model: 0 // 0地图 2列表
         }
+    }
+
+    componentDidMount() {
+        window.addEventListener("beforeunload", ()=>{
+            console.log('页面即将刷新')
+            localStorage.removeItem('address')
+        })
+      }
+
+      
+    componentWillUnmount(){
+        console.log('准备卸载拉')
+        localStorage.removeItem('address')
     }
     render() {
         const { model } = this.state
@@ -287,12 +302,26 @@ export default class Park extends React.Component {
 
                         <Col span={1} />
                         <Col span={6}>
-                            地址 ：<Input placeholder="" style={{ width: '80%' }} />
+                            地址 ：<Input placeholder="" style={{ width: '80%' }} onChange={e=>{
+                                this.setState({
+                                    address:e.target.value
+                                })
+                            }}/>
                         </Col>
 
                         <Col span={1} />
                         <Col span={4}>
-                            <Button style={{
+                            <Button onClick={()=>{
+                                localStorage.setItem('address',this.state.address)
+                                this.setState({
+                                    model:1
+                                },()=>{
+                                    this.setState({
+                                        model:0
+                                    })
+                                })
+                                console.log('打印下当前输入的地址',this.state.address)
+                            }} style={{
                                 width: '100%', background: '#78CD9D', border: "none", color: 'white', fontSize: '0.16rem',
                                 display: 'flex', justifyContent: 'center', alignItems: 'center'
                             }}>
@@ -334,12 +363,12 @@ export default class Park extends React.Component {
                                 })
                             }}>列表模式</Button>
                     </p>
-              
-                    <section>
-                        {model == 0 ? <iframe srcDoc={require('/src/utils/map.html')} style={{ width: '100%', height: '8rem' }}></iframe>
+
+                   { <section>
+                        {model == 0 ? <iframe srcDoc={_iframe} style={{ width: '100%', height: '6rem' }}></iframe>
                             :
-                            <Table columns={columns} dataSource={data} rowKey={row=>row.index}/>}
-                    </section>
+                            <Table columns={columns} dataSource={data} rowKey={row => row.index} />}
+                    </section>}
                 </main>
             </div>
         )
