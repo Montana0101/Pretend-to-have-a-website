@@ -131,7 +131,16 @@ export default class Home extends React.Component {
                     </div>
                 </header>
 
-                <div className='banner'>
+                <div className='banner' style={{ position: 'relative' }}>
+                    <img src={require('/src/static/code.png')} style={{
+                        position: 'absolute',
+                        right: 0,
+                        bottom: 0,
+                        zIndex: 777,
+                        width: '20%',
+                        right: '7.3%'
+                    }} />
+
                     <img src={require('/src/static/home/banner.png')} />
                 </div>
 
@@ -197,6 +206,7 @@ export default class Home extends React.Component {
                             </p>
                         </div>}
 
+
                         <img src={require('/src/static/home/guanggao.png')} />
 
                         {
@@ -219,12 +229,11 @@ export default class Home extends React.Component {
                             </p>
                             <p>
                                 <b>电话 : </b>
-                                <span>4008-88888</span>
+                                <span>021-65215566</span>
                             </p>
-                            {/* <Divider dashed></Divider> */}
                             <p>
                                 <b>邮件 : </b>
-                                <span>service@ruixing.com</span>
+                                <span>huqiang@shbeidou.com</span>
                             </p>
                         </div>
                     </div>
@@ -245,7 +254,8 @@ export default class Home extends React.Component {
                             </div>
                         </header>
 
-                        <section>
+                        <section style={{
+                        }}>
                             <article>
                                 <div className='article-1'>
                                     <p>
@@ -367,7 +377,17 @@ export default class Home extends React.Component {
                                     </ul>
                                 </div>
                             </article>
-                            <img src={require('/src/static/home/map.png')} />
+                            <div className='last-img'>
+                                <img src={require('/src/static/home/map.png')} style={{
+                                    width: '100%'
+                                }} />
+                                <img src={require('/src/static/code.png')} style={{
+                                    position: 'absolute',
+                                    left: '8%',
+                                    bottom: '15%',
+                                    width: '27%'
+                                }} />
+                            </div>
                         </section>
                     </div>
                 </main>

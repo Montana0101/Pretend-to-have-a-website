@@ -250,20 +250,20 @@ export default class Park extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            address:'',
+            address: '',
             model: 0 // 0地图 2列表
         }
     }
 
     componentDidMount() {
-        window.addEventListener("beforeunload", ()=>{
+        window.addEventListener("beforeunload", () => {
             console.log('页面即将刷新')
             localStorage.removeItem('address')
         })
-      }
+    }
 
-      
-    componentWillUnmount(){
+
+    componentWillUnmount() {
         console.log('准备卸载拉')
         localStorage.removeItem('address')
     }
@@ -302,25 +302,24 @@ export default class Park extends React.Component {
 
                         <Col span={1} />
                         <Col span={6}>
-                            地址 ：<Input placeholder="" style={{ width: '80%' }} onChange={e=>{
+                            地址 ：<Input placeholder="" style={{ width: '80%' }} onChange={e => {
                                 this.setState({
-                                    address:e.target.value
+                                    address: e.target.value
                                 })
-                            }}/>
+                            }} />
                         </Col>
 
                         <Col span={1} />
                         <Col span={4}>
-                            <Button onClick={()=>{
-                                localStorage.setItem('address',this.state.address)
+                            <Button onClick={() => {
+                                localStorage.setItem('address', this.state.address)
                                 this.setState({
-                                    model:1
-                                },()=>{
+                                    model: 1
+                                }, () => {
                                     this.setState({
-                                        model:0
+                                        model: 0
                                     })
                                 })
-                                console.log('打印下当前输入的地址',this.state.address)
                             }} style={{
                                 width: '100%', background: '#78CD9D', border: "none", color: 'white', fontSize: '0.16rem',
                                 display: 'flex', justifyContent: 'center', alignItems: 'center'
@@ -364,7 +363,7 @@ export default class Park extends React.Component {
                             }}>列表模式</Button>
                     </p>
 
-                   { <section>
+                    {<section>
                         {model == 0 ? <iframe srcDoc={_iframe} style={{ width: '100%', height: '6rem' }}></iframe>
                             :
                             <Table columns={columns} dataSource={data} rowKey={row => row.index} />}

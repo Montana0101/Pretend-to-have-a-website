@@ -251,6 +251,7 @@ export default class MonthRent extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            address: '',
             model: 0 // 0地图 2列表
         }
     }
@@ -286,15 +287,32 @@ export default class MonthRent extends React.Component {
                         <Col span={1} />
                         <Col span={8}>
                             地址 ：<Input
-                                placeholder={`${JSON.parse(localStorage.getItem('parkinfo')).address ?
-                                    JSON.parse(localStorage.getItem('parkinfo')).address :
-                                    '上海市罗南经开区'}`}
-                                style={{ width: '80%' }} />
+                                placeholder={`请输入搜索地址`}
+                                style={{ width: '80%' }}
+                                onChange={e => {
+                                    this.setState({
+                                        address: e.target.value
+                                    })
+                                }}
+                            />
                         </Col>
 
                         <Col span={1} />
                         <Col span={4}>
-                            <Button onClick={() => { this.props.history.push('/month/search') }}
+                            <Button onClick={() => {
+                                let _obj = JSON.parse(localStorage.getItem('parkinfo'))
+                                if (_obj) {
+                                    _obj.parkname = this.state.address
+                                    localStorage.setItem('parkinfo', JSON.stringify(_obj))
+                                }
+                                this.setState({
+                                    model: 1
+                                }, () => {
+                                    this.setState({
+                                        model: 0
+                                    })
+                                })
+                            }}
                                 style={{
                                     width: '100%', background: '#78CD9D', border: "none", color: 'white', fontSize: '0.16rem',
                                     display: 'flex', justifyContent: 'center', alignItems: 'center'

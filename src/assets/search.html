@@ -40,24 +40,45 @@
 	<div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
 </body>
 </html>
-<script type="text/javascript">
-	// 百度地图API功能
-	var map = new BMapGL.Map("container");            // 创建Map实例
-	var mPoint = new BMapGL.Point(121.373849,31.148915);  
-	map.enableScrollWheelZoom();
-    map.centerAndZoom(mPoint,15);
-    
 
-	var circle = new BMapGL.Circle(mPoint,1000,{fillColor:"red", strokeWeight: 1 ,fillOpacity: 0.3, strokeOpacity: 0});
-    map.addOverlay(circle);
-    var local =  new BMapGL.LocalSearch(map, {renderOptions: {map: map, autoViewport: false}});  
-    let add = '停车场'
+<script typet="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+    let url = 'http://api.map.baidu.com/geocoding/v3/'
+    const ak = 'zUGHiwO7ZFzU56xkNfsQmEt5njbvSTU9'
+    let add = '上海市政府'
     
     if(localStorage.getItem('parkinfo')){
         add = JSON.parse(localStorage.getItem('parkinfo')).parkname
     }else{
     }
-
-    local.searchNearby(add,mPoint,1000);
     
+    var map = new BMapGL.Map("container");     
+    
+    let _url =`${url}?address=${add}&output=json&ak=${ak}`
+    const showLocation = () => {
+        console.log('回调下')
+    }
+
+    var mPoint = null
+
+    $.ajax({
+        type: "get",
+        async:false,
+        url: _url,
+        dataType: "jsonp",
+        jsonpCallback:"showLocation",       
+        success: function(data){
+            mPoint= new BMapGL.Point(data.result.location.lng,data.result.location.lat); 
+            
+            map.enableScrollWheelZoom();
+            map.centerAndZoom(mPoint,15);
+            
+            var circle = new BMapGL.Circle(mPoint,1000,{fillColor:"red", strokeWeight: 1 ,fillOpacity: 0.3, strokeOpacity: 0});
+            map.addOverlay(circle);
+            var local =  new BMapGL.LocalSearch(map, {renderOptions: {map: map, autoViewport: false}});  
+
+            local.searchNearby(add,mPoint,1000);
+                }
+            });
+
 </script>

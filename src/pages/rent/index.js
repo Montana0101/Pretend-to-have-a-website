@@ -53,8 +53,6 @@ const columns = [
     },
 ];
 
-
-
 export default class Rent extends React.Component {
     constructor(props) {
         super(props)
