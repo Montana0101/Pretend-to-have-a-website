@@ -1,6 +1,7 @@
 import React from 'react'
 import { Cascader, Select, Row, Col, Button, Input, Table, Tag, Space } from 'antd'
 import _iframe from '/src/assets/map.html'
+// import MapCpt from './map'
 
 const { Option } = Select
 
@@ -260,6 +261,11 @@ export default class Park extends React.Component {
             console.log('页面即将刷新')
             localStorage.removeItem('address')
         })
+
+        // let ifm = document.getElementById('ifm').contentWindow;
+        // let dom = ifm.document.querySelectorAll('a')
+        // console.log('的撒那就看打赏',dom)
+       
     }
 
 
@@ -364,10 +370,16 @@ export default class Park extends React.Component {
                     </p>
 
                     {<section>
-                        {model == 0 ? <iframe srcDoc={_iframe} style={{ width: '100%', height: '6rem' }}></iframe>
+                        {model == 0 ? <iframe id="ifm" srcDoc={_iframe} style={{ width: '100%', height: '6rem' }}></iframe>
                             :
                             <Table columns={columns} dataSource={data} rowKey={row => row.index} />}
                     </section>}
+
+                    {/* {<section>
+                        {model == 0 ? <div style={{ width: '100%', height: '6rem' }}><MapCpt/></div>
+                            :
+                            <Table columns={columns} dataSource={data} rowKey={row => row.index} />}
+                    </section>} */}
                 </main>
             </div>
         )

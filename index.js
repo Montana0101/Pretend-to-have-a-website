@@ -1,4 +1,4 @@
-import React from 'react'
+import React , {useEffect} from 'react'
 import ReactDOM from 'react-dom'
 import { BaseRouter } from '/src/route/index'
 import 'babel-polyfill'
