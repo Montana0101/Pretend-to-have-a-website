@@ -12,11 +12,29 @@ export default class RentDetail extends React.Component {
     }
 
     componentDidMount() {
+        console.log('停车场详情获取参数',this.props.location)
         if (this.props.location.query) {
+            console.log('停车场详情获取参数',this.props.location)
             this.setState({
                 data: this.props.location.query.data
             })
         }
+
+        if(JSON.parse(localStorage.getItem('nav'))){
+            // let params = this.props.location.search 
+            // params = params.slice(5)
+
+            this.setState({
+                data:JSON.parse(localStorage.getItem('nav'))
+            })
+            // console.log('第三阿娇肯定是',JSON.parse(decodeURI(params)))
+        }
+    }
+
+    _randomNums = () => {
+        let num = 0 
+        num = parseInt(Math.random()*100)
+        return num
     }
 
     render() {
@@ -31,7 +49,7 @@ export default class RentDetail extends React.Component {
                     <ul>
                         <li>
                             <span>停车场名称：</span>
-                            <span>{data && data.name}</span>
+                            <span>{data && data.name || data.title}</span>
                         </li>
                         <li>
                             <span>剩余停车场：</span>
@@ -39,7 +57,7 @@ export default class RentDetail extends React.Component {
                         </li>
                         <li>
                             <span>车位容量：</span>
-                            <span>{(data && data.free * 20).toString()}</span>
+                            <span>{(data && data.free * 20 || this._randomNums()).toString()}</span>
                         </li>
                         <li>
                             <span>开放时间：</span>
@@ -51,11 +69,11 @@ export default class RentDetail extends React.Component {
                         </li>
                         <li>
                             <span>经度：</span>
-                            <span>121.480248</span>
+                            <span>{data && data.point && data.point.lng}</span>
                         </li>
                         <li>
                             <span>纬度：</span>
-                            <span>31.236276</span>
+                            <span>{data && data.point && data.point.lat}</span>
                         </li>
                         <li>
                             <span>入口位置：</span>
