@@ -60,18 +60,13 @@ class MapCpt extends React.Component {
         return (
             <div style={{ height: '100%', width: '100%' }}>
                 <Map center={{ lng, lat }} zoom="11" style={{ height: '100%' }}>
-
-
-
                     {
                         points.map((item, index) => {
                             const { lng, lat } = item.location
                             return <Marker position={{ lng, lat }} key={index}/>
                         })
                     }
-
-                    
-{
+                    {
                         points.map((item, index) => {
                             const { lng, lat } = item.location
                             return <InfoWindow position={{ lng, lat }} text="内容" title="标题" key={index}/>

@@ -18,23 +18,22 @@ export default class RentDetail extends React.Component {
             this.setState({
                 data: this.props.location.query.data
             })
-        }
-
-        if(JSON.parse(localStorage.getItem('nav'))){
-            // let params = this.props.location.search 
-            // params = params.slice(5)
-
-            this.setState({
-                data:JSON.parse(localStorage.getItem('nav'))
-            })
-            // console.log('第三阿娇肯定是',JSON.parse(decodeURI(params)))
-        }
+        }else{
+            if(JSON.parse(localStorage.getItem('nav'))){
+                // let params = this.props.location.search 
+                // params = params.slice(5)
+    
+                this.setState({
+                    data:JSON.parse(localStorage.getItem('nav'))
+                })
+                localStorage.removeItem('nav')
+                // console.log('第三阿娇肯定是',JSON.parse(decodeURI(params)))
+            }
+        }   
     }
 
-    _randomNums = () => {
-        let num = 0 
-        num = parseInt(Math.random()*100)
-        return num
+    _randomNums = (a,b) => {
+        return Math.round(Math.random() * (b - a))+a
     }
 
     render() {
@@ -52,12 +51,12 @@ export default class RentDetail extends React.Component {
                             <span>{data && data.name || data.title}</span>
                         </li>
                         <li>
-                            <span>剩余停车场：</span>
-                            <span>{data && data.free}</span>
+                            <span>剩余停车位：</span>
+                            <span>{(data && data.free || this._randomNums(20,60))}</span>
                         </li>
                         <li>
                             <span>车位容量：</span>
-                            <span>{(data && data.free * 20 || this._randomNums()).toString()}</span>
+                            <span>{(data && data.free * 20 || this._randomNums(100,300)).toString()}</span>
                         </li>
                         <li>
                             <span>开放时间：</span>

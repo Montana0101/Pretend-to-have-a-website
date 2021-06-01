@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "predev": "rimraf dist .cache",
-    "dev": "parcel index.html --port 2012",
+    "dev": "parcel index.html --port 20111",
     "prebuild": "rimraf dist .cache",
     "build": "parcel build index.html --no-source-maps"
   },

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Cascader, Select, Row, Col, Button, Input, Table, Tag, Space } from 'antd'
-import _iframe from '/src/assets/map.html'
+import _iframe from '../../assets/map.html'
 // import MapCpt from './map'
 
 const { Option } = Select
@@ -125,13 +125,7 @@ const columns = [
         align: 'center'
     },
     {
-        title: '距离',
-        key: 'distance',
-        dataIndex: 'distance',
-        align: 'center'
-    },
-    {
-        title: '价格(元)',
+        title: '价格(元/月)',
         key: 'price',
         align: 'center',
         dataIndex: 'price',
@@ -171,7 +165,7 @@ const data = [
         distance: 1020,
         address: '通北路800号',
         price: 900,
-        free: 10
+        free: 30
     },
     {
         index: 3,
@@ -187,7 +181,7 @@ const data = [
         distance: 1200,
         address: '吴淞路与武进路交叉口西100米',
         price: 600,
-        free: 3
+        free: 29
     },
     {
         index: 5,
@@ -203,7 +197,7 @@ const data = [
         distance: 500,
         address: '上海市虹口区保定路230号6楼附近',
         price: 600,
-        free: 10
+        free: 33
     },
     {
         index: 7,
@@ -211,7 +205,7 @@ const data = [
         distance: 380,
         address: '中山北二路2199号',
         price: 1200,
-        free: 10
+        free: 27
     },
     {
         index: 8,
@@ -219,7 +213,7 @@ const data = [
         distance: 720,
         address: '中山北二路2199号',
         price: 1200,
-        free: 15
+        free: 36
     },
     {
         index: 9,
@@ -227,7 +221,7 @@ const data = [
         distance: 280,
         address: '上海市虹口区逸仙路328号',
         price: 800,
-        free: 12
+        free: 17
     },
     {
         index: 10,
@@ -262,17 +256,100 @@ export default class Park extends React.Component {
             localStorage.removeItem('address')
         })
 
-        // let ifm = document.getElementById('ifm').contentWindow;
-        // let dom = ifm.document.querySelectorAll('a')
-        // console.log('的撒那就看打赏',dom)
+        console.log('获取示例',this.mapContainer)
+        this.renderMap()
        
     }
 
 
     componentWillUnmount() {
-        console.log('准备卸载拉')
         localStorage.removeItem('address')
     }
+
+    renderMap(){
+    // 百度地图API功能
+    var map = new BMapGL.Map(this.mapContainer);            // 创建Map实例
+    var mPoint = new BMapGL.Point(121.480248, 31.236276);
+    map.enableScrollWheelZoom();
+    map.centerAndZoom(mPoint, 14);
+
+    var _cutobj = {
+    }
+
+
+    var circle = new BMapGL.Circle(mPoint, 4500, { fillColor: "blue", strokeWeight: 1, fillOpacity: 0, strokeOpacity: 0 });
+    map.addOverlay(circle);
+    var local = new BMapGL.LocalSearch(map, {
+        renderOptions: { map: map, autoViewport: true },
+        pageCapacity: 80,
+        onInfoHtmlSet:function(event){
+            console.log('的三剑客时代',event)
+            _cutobj.city = event.city
+            _cutobj.title = event.title 
+            _cutobj.point = event.point
+            _cutobj.url = event.url
+            _cutobj.address = event.city + event.address
+        }
+    });
+    let add = '上海市停车场'
+
+    if (localStorage.getItem('address')) {
+        add = localStorage.getItem('address')
+    } else {
+    }
+    local.searchNearby(add, mPoint, 4500);
+
+    // let pane = map.getPanes().markerPane.parentNode.children[0].childNodes
+    let doms = null
+    // let container = null
+
+    setInterval(()=>{
+        doms = document.getElementsByClassName('BMap_bubble_title')[0]
+        let _cont = document.getElementsByClassName('BMap_bubble_content')[0]
+       
+        let _content = document.getElementsByTagName('tbody')[0]
+        
+        // let _col_node = document.getElementsByClassName('BMap_bubble_content')[0].childNodes
+        _cont.style.height='100px'
+        let dom_div = document.createElement('tr')
+        
+        let _obj = JSON.stringify(_cutobj)
+
+        // localStorage.removeItem('nav')
+       
+        console.log('打印下当前额',_obj)
+
+        dom_div.style.zIndex=100000000000
+
+        dom_div.innerHTML = `
+             <td style="z-index:9999"> 详情：</td>
+             <td>
+                <a href='/park/detail' target="_blank" style="z-index:9999">查看停车场详情</a>
+             </td>
+        `
+        localStorage.setItem('nav',_obj)
+
+        if(_content.innerHTML.indexOf('<a')!=-1){
+            return
+        }else{
+            _content.append(dom_div)
+        }
+     
+  
+
+        let _pop = document.getElementsByClassName('BMap_bubble_pop')[0]
+        _pop.style.height='120px'
+    
+
+       let _tagA = doms.getElementsByTagName('a')[0]
+
+        _tagA.innerText='导航》'
+        _tagA.target=' _blank'
+  
+
+    },1000)
+    }
+
     render() {
         const { model } = this.state
         return (
@@ -289,7 +366,7 @@ export default class Park extends React.Component {
 
                     <Row style={{ margin: '0.2rem 0' }}>
                         <Col span={12}>
-                            <Row style={{}} align="middle">
+                            <Row align="middle">
                                 <Col span={3}>
                                     停车地图 :
                                 </Col>
@@ -370,7 +447,9 @@ export default class Park extends React.Component {
                     </p>
 
                     {<section>
-                        {model == 0 ? <iframe id="ifm" srcDoc={_iframe} style={{ width: '100%', height: '6rem' }}></iframe>
+                        {model == 0 ? 
+                            <div id="map-container" ref={el=>this.mapContainer=el} style={{ width: '100%', height: '6rem' }}></div>
+                        // <iframe id="ifm" srcDoc={_iframe} style={{ width: '100%', height: '6rem' }}></iframe>
                             :
                             <Table columns={columns} dataSource={data} rowKey={row => row.index} />}
                     </section>}

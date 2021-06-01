@@ -171,7 +171,7 @@ const data = [
         distance: 1020,
         address: '东江湾路444号',
         price: 900,
-        free: 10
+        free: 27
     },
     {
         index: 3,
@@ -187,7 +187,7 @@ const data = [
         distance: 1200,
         address: '吴淞路与武进路交叉口西100米',
         price: 600,
-        free: 3
+        free: 32
     },
     {
         index: 5,
@@ -203,7 +203,7 @@ const data = [
         distance: 500,
         address: '上海市虹口区保定路230号6楼附近',
         price: 600,
-        free: 10
+        free: 33
     },
     {
         index: 7,
@@ -211,7 +211,7 @@ const data = [
         distance: 380,
         address: '中山北二路2199号',
         price: 1200,
-        free: 10
+        free: 32
     },
     {
         index: 8,
@@ -219,7 +219,7 @@ const data = [
         distance: 720,
         address: '中山北二路2199号',
         price: 1200,
-        free: 15
+        free: 25
     },
     {
         index: 9,
@@ -227,7 +227,7 @@ const data = [
         distance: 280,
         address: '上海市虹口区逸仙路328号',
         price: 800,
-        free: 12
+        free: 22
     },
     {
         index: 10,
@@ -255,6 +255,59 @@ export default class MonthRent extends React.Component {
             model: 0 // 0地图 2列表
         }
     }
+
+    componentDidMount() {
+        this.renderSearch()
+    }
+
+    componentDidUpdate(){
+        if(this.state.model==0){
+            this.renderSearch()
+        }
+    }
+
+    renderSearch() {
+        let url = 'http://api.map.baidu.com/geocoding/v3/'
+        const ak = 'zUGHiwO7ZFzU56xkNfsQmEt5njbvSTU9'
+        let add = '上海市大镜路停车场'
+
+        if (localStorage.getItem('parkinfo')) {
+            add = JSON.parse(localStorage.getItem('parkinfo')).parkname
+        } else {
+        }
+
+        var map = new BMapGL.Map(this.searchContainer);
+        var mPoint = new BMapGL.Point(121.480248, 31.236276);
+        map.enableScrollWheelZoom();
+        map.centerAndZoom(mPoint, 14);
+
+        console.log('打印下MAP对象',map)
+        let _url = `${url}?address=${add}&output=json&ak=${ak}`
+
+        var mPoint = null
+
+        $.ajax({
+            type: "get",
+            async: false,
+            url: _url,
+            dataType: "jsonp",
+            jsonpCallback: "showLocation",
+            success: function (data) {
+                console.log('打印下首都埃会撒谎对啊撒',data)
+                mPoint = new BMapGL.Point(data.result.location.lng, data.result.location.lat);
+
+                map.enableScrollWheelZoom();
+                map.centerAndZoom(mPoint, 15);
+
+                var circle = new BMapGL.Circle(mPoint, 1000, { fillColor: "red", strokeWeight: 1, fillOpacity: 0.3, strokeOpacity: 0 });
+                map.addOverlay(circle);
+                var local = new BMapGL.LocalSearch(map, { renderOptions: { map: map, autoViewport: false } });
+
+                local.searchNearby(add, mPoint, 1000);
+            }
+        });
+    }
+
     render() {
         const { model } = this.state
         return (
@@ -371,7 +424,9 @@ export default class MonthRent extends React.Component {
                     </p>
 
                     <section>
-                        {model == 0 ? <iframe srcDoc={require('/src/assets/search.html')} style={{ width: '100%', height: '8rem' }}></iframe>
+                        {model == 0 ?
+                            <div ref={el => this.searchContainer = el} style={{ width: '100%', height: '8rem' }}></div>
+                            // <iframe srcDoc={require('/src/assets/search.html')} ></iframe>
                             :
                             <Table columns={columns} dataSource={data} rowKey={row => row.index} />}
                     </section>

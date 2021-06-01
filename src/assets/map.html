@@ -2,12 +2,9 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <script type="text/javascript"
         src="//api.map.baidu.com/api?type=webgl&v=1.0&ak=zUGHiwO7ZFzU56xkNfsQmEt5njbvSTU9"></script>
-        <script type="text/javascript"src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
-        <title>圆形区域搜索</title>
+    <title>圆形区域搜索</title>
     <style>
         body,
         html,
@@ -57,10 +54,10 @@
     var local = new BMapGL.LocalSearch(map, {
         renderOptions: { map: map, autoViewport: true },
         pageCapacity: 80,
-        onInfoHtmlSet:function(event){
-            console.log('的三剑客时代',event)
+        onInfoHtmlSet: function (event) {
+            console.log('的三剑客时代', event)
             _cutobj.city = event.city
-            _cutobj.title = event.title 
+            _cutobj.title = event.title
             _cutobj.point = event.point
             _cutobj.url = event.url
             _cutobj.address = event.city + event.address
@@ -78,21 +75,22 @@
     let doms = null
     let container = null
 
-    setInterval(()=>{
+    setInterval(() => {
+        console.log('的撒会的撒', pane)
         doms = document.getElementsByClassName('BMap_bubble_title')[0]
         let _cont = document.getElementsByClassName('BMap_bubble_content')[0]
-        _cont.style.height='100px'
-        let _content = document.getElementsByTagName('tbody')[0]
-        
-        let _col_node = document.getElementsByClassName('BMap_bubble_content')[0].childNodes
 
+        let _content = document.getElementsByTagName('tbody')[0]
+
+        let _col_node = document.getElementsByClassName('BMap_bubble_content')[0].childNodes
+        _cont.style.height = '100px'
         let dom_div = document.createElement('tr')
 
         let _obj = JSON.stringify(_cutobj)
 
-        localStorage.setItem('nav',_obj)
+        localStorage.setItem('nav', _obj)
 
-        dom_div.style.zIndex=100000000000
+        dom_div.style.zIndex = 100000000000
 
         dom_div.innerHTML = `
              <td style="z-index:9999"> 详情：</td>
@@ -101,25 +99,25 @@
              </td>
         `
 
-        if(_content.innerHTML.indexOf('<a')!=-1){
+        if (_content.innerHTML.indexOf('<a') != -1) {
             return
-        }else{
+        } else {
             _content.append(dom_div)
         }
-     
-  
+
+
 
         let _pop = document.getElementsByClassName('BMap_bubble_pop')[0]
-        _pop.style.height='120px'
-    
+        _pop.style.height = '120px'
+
 
         _tagA = doms.getElementsByTagName('a')[0]
 
-        _tagA.innerText='导航》'
-        _tagA.target=' _blank'
-  
+        _tagA.innerText = '导航》'
+        _tagA.target = ' _blank'
 
-    },1000)
+
+    }, 1000)
 
 
 </script>
