@@ -56,8 +56,7 @@ export default class RentDetail extends React.Component {
                         </li>
                         <li>
                             <span>车位容量：</span>
-                            <span>{(data && data.free * 20 || this._randomNums(100,300)).toString()}</span>
-                        </li>
+                            <span>{this._randomNums(100, 300).toString()}</span>                        </li>
                         <li>
                             <span>开放时间：</span>
                             <span>00:00:00-24:00:00</span>

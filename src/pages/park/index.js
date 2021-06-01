@@ -241,6 +241,16 @@ const data = [
     },
 ];
 
+
+var dom_div = document.createElement('tr')
+dom_div.style.zIndex = 100000000000
+dom_div.innerHTML = `
+ <td style="z-index:9999"> 详情：</td>
+ <td>
+    <a href='/park/detail' target="_self" style="z-index:9999">查看停车场详情</a>
+ </td>
+`
+
 export default class Park extends React.Component {
     constructor(props) {
         super(props)
@@ -252,102 +262,92 @@ export default class Park extends React.Component {
 
     componentDidMount() {
         window.addEventListener("beforeunload", () => {
-            console.log('页面即将刷新')
             localStorage.removeItem('address')
         })
-
-        console.log('获取示例',this.mapContainer)
+        console.log('获取示例')
         this.renderMap()
-       
     }
 
-
+    componentDidUpdate(){
+        if(this.state.model==0){
+            this.renderMap()
+        }
+    }
+    
     componentWillUnmount() {
         localStorage.removeItem('address')
     }
 
-    renderMap(){
-    // 百度地图API功能
-    var map = new BMapGL.Map(this.mapContainer);            // 创建Map实例
-    var mPoint = new BMapGL.Point(121.480248, 31.236276);
-    map.enableScrollWheelZoom();
-    map.centerAndZoom(mPoint, 14);
+    renderMap() {
+        // 百度地图API功能
+        let map = new BMapGL.Map(this.mapContainer);            // 创建Map实例
+        let mPoint = new BMapGL.Point(121.480248, 31.236276);
+        map.enableScrollWheelZoom();
+        map.centerAndZoom(mPoint, 14);
 
-    var _cutobj = {
-    }
+        let _cutobj = {}
 
+        let circle = new BMapGL.Circle(mPoint, 4500, { fillColor: "blue", strokeWeight: 1, fillOpacity: 0, strokeOpacity: 0 });
+        map.addOverlay(circle);
+        let local = new BMapGL.LocalSearch(map, {
+            renderOptions: { map: map, autoViewport: true },
+            pageCapacity: 80,
+            onInfoHtmlSet: function (event) {
+                console.log('点的是啥~~~~~~', event)
+                _cutobj.city = event.city
+                _cutobj.title = event.title
+                _cutobj.point = event.point
+                _cutobj.url = event.url
+                _cutobj.address = event.city + event.address
+            }
+        });
 
-    var circle = new BMapGL.Circle(mPoint, 4500, { fillColor: "blue", strokeWeight: 1, fillOpacity: 0, strokeOpacity: 0 });
-    map.addOverlay(circle);
-    var local = new BMapGL.LocalSearch(map, {
-        renderOptions: { map: map, autoViewport: true },
-        pageCapacity: 80,
-        onInfoHtmlSet:function(event){
-            console.log('的三剑客时代',event)
-            _cutobj.city = event.city
-            _cutobj.title = event.title 
-            _cutobj.point = event.point
-            _cutobj.url = event.url
-            _cutobj.address = event.city + event.address
+        let add = '上海市停车场'
+
+        if (localStorage.getItem('address')) {
+            add = localStorage.getItem('address')
+        } else {
         }
-    });
-    let add = '上海市停车场'
 
-    if (localStorage.getItem('address')) {
-        add = localStorage.getItem('address')
-    } else {
-    }
-    local.searchNearby(add, mPoint, 4500);
+        local.searchNearby(add, mPoint, 4500);
 
-    // let pane = map.getPanes().markerPane.parentNode.children[0].childNodes
-    let doms = null
-    // let container = null
+        // let pane = map.getPanes().markerPane.parentNode.children[0].childNodes
+        let doms = null
 
-    setInterval(()=>{
-        doms = document.getElementsByClassName('BMap_bubble_title')[0]
-        let _cont = document.getElementsByClassName('BMap_bubble_content')[0]
-       
-        let _content = document.getElementsByTagName('tbody')[0]
-        
-        // let _col_node = document.getElementsByClassName('BMap_bubble_content')[0].childNodes
-        _cont.style.height='100px'
-        let dom_div = document.createElement('tr')
-        
-        let _obj = JSON.stringify(_cutobj)
+        setInterval(() => {
+            doms = document.getElementsByClassName('BMap_bubble_title')[0]
+            let _cont = document.getElementsByClassName('BMap_bubble_content')[0]
 
-        // localStorage.removeItem('nav')
-       
-        console.log('打印下当前额',_obj)
+            let _content = document.getElementsByTagName('tbody')[0]
 
-        dom_div.style.zIndex=100000000000
+            // let _col_node = document.getElementsByClassName('BMap_bubble_content')[0].childNodes
+            _cont.style.height = '100px'
+         
 
-        dom_div.innerHTML = `
-             <td style="z-index:9999"> 详情：</td>
-             <td>
-                <a href='/park/detail' target="_blank" style="z-index:9999">查看停车场详情</a>
-             </td>
-        `
-        localStorage.setItem('nav',_obj)
+            let _obj = JSON.stringify(_cutobj)
 
-        if(_content.innerHTML.indexOf('<a')!=-1){
-            return
-        }else{
-            _content.append(dom_div)
-        }
-     
-  
+ 
+            localStorage.setItem('nav', _obj)
 
-        let _pop = document.getElementsByClassName('BMap_bubble_pop')[0]
-        _pop.style.height='120px'
-    
+            if (_content.innerHTML.indexOf('<a') != -1) {
+                return
+            } else {
+                _content.append(dom_div)
+            }
 
-       let _tagA = doms.getElementsByTagName('a')[0]
 
-        _tagA.innerText='导航》'
-        _tagA.target=' _blank'
-  
 
-    },1000)
+            let _pop = document.getElementsByClassName('BMap_bubble_pop')[0]
+            _pop.style.height = '120px'
+
+
+            let _tagA = doms.getElementsByTagName('a')[0]
+
+            _tagA.innerText = '导航》'
+            _tagA.target = ' _blank'
+
+
+        }, 1000)
     }
 
     render() {
@@ -447,9 +447,9 @@ export default class Park extends React.Component {
                     </p>
 
                     {<section>
-                        {model == 0 ? 
-                            <div id="map-container" ref={el=>this.mapContainer=el} style={{ width: '100%', height: '6rem' }}></div>
-                        // <iframe id="ifm" srcDoc={_iframe} style={{ width: '100%', height: '6rem' }}></iframe>
+                        {model == 0 ?
+                            <div id="map-container" ref={el => this.mapContainer = el} style={{ width: '100%', height: '6rem' }}></div>
+                            // <iframe id="ifm" srcDoc={_iframe} style={{ width: '100%', height: '6rem' }}></iframe>
                             :
                             <Table columns={columns} dataSource={data} rowKey={row => row.index} />}
                     </section>}

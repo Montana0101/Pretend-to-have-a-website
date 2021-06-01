@@ -3,9 +3,7 @@ import './style.less'
 import { message, Button, Input, Checkbox } from 'antd';
 import { SmileTwoTone, HeartTwoTone, CheckCircleTwoTone } from '@ant-design/icons';
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
+    BrowserRouter,
     Link
 } from "react-router-dom";
 
@@ -177,13 +175,13 @@ export default class Home extends React.Component {
                                     } else if (!this.state.password) {
                                         message.warn('请输入密码')
                                     } else {
-                                        if (this.state.username == 'haitao123' ||
+                                        if (this.state.username == 'test' ||
                                             this.state.username == 'yh2020') {
                                             localStorage.setItem('user', JSON.stringify(
                                                 {
                                                     username: this.state.username,
                                                     password: this.state.password,
-                                                    realname: this.state.username == 'haitao123' ? '赵海涛' : "袁寒"
+                                                    realname: this.state.username == 'test' ? '赵海涛' : "袁寒"
                                                 }
                                             ))
                                             this.setState({
@@ -381,11 +379,20 @@ export default class Home extends React.Component {
                                 <img src={require('/src/static/home/map.png')} style={{
                                     width: '100%'
                                 }} />
+
                                 <img src={require('/src/static/code.png')} style={{
                                     position: 'absolute',
                                     left: '8%',
                                     bottom: '15%',
                                     width: '27%'
+                                }} />
+
+                                <img src={require('/src/static/car.jpg')} style={{
+                                    position: 'absolute',
+                                    left: '4%',
+                                    right:'4%',
+                                    top: '5%',
+                                    width: '92%'
                                 }} />
                             </div>
                         </section>

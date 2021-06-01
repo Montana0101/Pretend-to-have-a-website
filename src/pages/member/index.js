@@ -40,12 +40,12 @@ export default class Member extends React.Component {
         } else {
             user = JSON.parse(user)
             let obj = {}
-            if (user.username == 'haitao123') {
+            if (user.username == 'test') {
                 const _fak = JSON.parse(JSON.stringify(this.state.fak[0]))
                 for (let key in _fak) {
                     obj[key] = _fak[key]
                 }
-                obj.username = 'haitao123'
+                obj.username = 'test'
             } else if (user.username == 'yh2020') {
                 const _fak = JSON.parse(JSON.stringify(this.state.fak[1]))
                 for (let key in _fak) {

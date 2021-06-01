@@ -124,14 +124,9 @@ const columns = [
         key: 'address',
         align: 'center'
     },
+
     {
-        title: '距离',
-        key: 'distance',
-        dataIndex: 'distance',
-        align: 'center'
-    },
-    {
-        title: '价格(元)',
+        title: '价格(元/月)',
         key: 'price',
         align: 'center',
         dataIndex: 'price',
@@ -148,7 +143,7 @@ const columns = [
         align: 'center',
         render: (text, record) => (
             <Space size="middle" key={text.index}>
-                <Link to={{ pathname: '/park/detail', query: { data: text } }} style={{ color: '#31912D' }}>查看</Link>
+                <Link to={{ pathname: '/month/rentDetail', query: { data: text } }} style={{ color: '#31912D' }}>租用</Link>
                 {/* <span>{JSON.stringify(text)}</span> */}
             </Space>
         ),
@@ -247,8 +242,18 @@ const data = [
     },
 ];
 
+let flag = true
+
 export default class MonthRent extends React.Component {
     constructor(props) {
+
+  
+            if(location.href.indexOf('#reloaded')==-1){
+            location.href=location.href+"#reloaded";
+            location.reload();
+            }
+            
+
         super(props)
         this.state = {
             address: '',
@@ -258,15 +263,18 @@ export default class MonthRent extends React.Component {
 
     componentDidMount() {
         this.renderSearch()
+
     }
 
-    componentDidUpdate(){
-        if(this.state.model==0){
+    componentDidUpdate() {
+        if (this.state.model == 0) {
             this.renderSearch()
         }
     }
 
     renderSearch() {
+        // 移除节点
+
         let url = 'http://api.map.baidu.com/geocoding/v3/'
         const ak = 'zUGHiwO7ZFzU56xkNfsQmEt5njbvSTU9'
         let add = '上海市大镜路停车场'
@@ -281,7 +289,6 @@ export default class MonthRent extends React.Component {
         map.enableScrollWheelZoom();
         map.centerAndZoom(mPoint, 14);
 
-        console.log('打印下MAP对象',map)
         let _url = `${url}?address=${add}&output=json&ak=${ak}`
 
         var mPoint = null
@@ -293,7 +300,7 @@ export default class MonthRent extends React.Component {
             dataType: "jsonp",
             jsonpCallback: "showLocation",
             success: function (data) {
-                console.log('打印下首都埃会撒谎对啊撒',data)
+                console.log('打印下首都埃会撒谎对啊撒', data)
                 mPoint = new BMapGL.Point(data.result.location.lng, data.result.location.lat);
 
                 map.enableScrollWheelZoom();
@@ -306,6 +313,8 @@ export default class MonthRent extends React.Component {
                 local.searchNearby(add, mPoint, 1000);
             }
         });
+
+        console.log('大撒把哈就受打击啊')
     }
 
     render() {

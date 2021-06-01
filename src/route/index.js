@@ -16,6 +16,7 @@ import MonthDetail from '/src/pages/month/detail'
 import MonthStop from '/src/pages/month/stop'
 import MonthRent from '/src/pages/month/rent'
 import MonthSearch from '/src/pages/month/search'
+import RentDetailPage from '/src/pages/month/rentDetail'
 
 // 出租车位
 import Rent from '/src/pages/rent'
@@ -43,6 +44,7 @@ const BaseRouter = () => {
           <Route path='/month/stop' component={MonthStop}/>
           <Route path='/month/rent' component={MonthRent}/>
           <Route path='/month/search' component={MonthSearch}/>
+          <Route path='/month/rentDetail' component={RentDetailPage}/>
 
           {/* 出租车位 */}
           <Route path='/rent' exact component={Rent}/>
